@@ -27,7 +27,7 @@
         My name is Henry Smith, and my mission for this project is to provide
         you with the most delicious homemade cookies while also helping the
         lives of everyone with "non-cookie" needs in the process. All profits
-        are donated to the chairty Lifeline. A noble cause dedicated to helping
+        are donated to the charity Lifeline. A noble cause dedicated to helping
         all Australians facing a crisis with constant 24 hour support. Buy a
         cookie today and you'll be smiling for two!
       </p>
@@ -67,5 +67,46 @@
         this is a joke).
       </p>
     </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const cookies = document.querySelectorAll(".cookie a");
+
+        cookies.forEach(cookie => {
+          cookie.addEventListener("click", function(event) {
+            event.preventDefault();
+            const type = new URL(this.href).searchParams.get("type");
+            const formHTML = `
+              <div class="form-container">
+                <h2>Order Your Cookie</h2>
+                <form id="orderForm">
+                  <input type="hidden" name="cookie" value="${type}">
+                  <input type="text" name="name" placeholder="Your Name" required>
+                  <input type="email" name="email" placeholder="Your Email" required>
+                  <button type="submit">Order Cookie</button>
+                </form>
+              </div>
+            `;
+            document.body.innerHTML = formHTML;
+            document.getElementById("orderForm").addEventListener("submit", submitForm);
+          });
+        });
+
+        function submitForm(event) {
+          event.preventDefault();
+          const formData = new FormData(this);
+          fetch('https://<your-heroku-app-name>.herokuapp.com/send-email', {
+            method: 'POST',
+            body: JSON.stringify(Object.fromEntries(formData)),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => alert(data.message))
+          .catch(error => console.error('Error:', error));
+        }
+      });
+    </script>
   </body>
 </html>
