@@ -18,12 +18,15 @@
       <p>Please fill in your details and we will get back to you soon!</p>
     </header>
     <section class="form-section">
-      <form action="send_order.php" method="POST" class="order-form">
+      <form id="orderForm" class="order-form">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required />
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required />
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required />
 
         <label for="cookie-type">Cookie Type:</label>
         <select id="cookie-type" name="cookie_type" required>
@@ -36,8 +39,32 @@
       </form>
     </section>
     <footer>
-      <p>&copy; 2024 Cookies for Kicks. All rights reserved (for legal purposes
-        this is a joke).</p>
+      <p>
+        &copy; 2024 Cookies for Kicks. All rights reserved (for legal purposes
+        this is a joke).
+      </p>
     </footer>
+
+    <script>
+      document
+        .getElementById("orderForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const formData = new FormData(this);
+          const formObject = Object.fromEntries(formData.entries());
+
+          fetch("https://<your-heroku-app-name>.herokuapp.com/send-email", {
+            method: "POST",
+            body: JSON.stringify(formObject),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => alert(data.message))
+            .catch((error) => console.error("Error:", error));
+        });
+    </script>
   </body>
 </html>
