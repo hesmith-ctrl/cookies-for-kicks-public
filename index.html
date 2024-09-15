@@ -1,112 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cookies for Kicks</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
     <header>
-      <div class="logo-container">
-        <img src="logo.PNG.png" alt="Cookies for Kicks Logo" />
-      </div>
-      <img src="logo.PNG2.png" alt="Cookies for Kicks Logo" />
-      <h1>Sweetening Lives, One Cookie at a Time</h1>
-      <p>Delicious cookies for a great cause!</p>
+        <h1>Welcome to Cookies for Kicks</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="order.html">Order Cookies</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
     </header>
-    <section class="hero">
-      <h2>Welcome to Cookies for Kicks</h2>
-      <p>
-        My name is Henry Smith, and my mission for this project is to provide
-        you with the most delicious homemade cookies while also helping the
-        lives of everyone with "non-cookie" needs in the process. All profits
-        are donated to the charity Lifeline. A noble cause dedicated to helping
-        all Australians facing a crisis with constant 24 hour support. Buy a
-        cookie today and you'll be smiling for two!
-      </p>
-      <a
-        href="https://www.lifeline.org.au"
-        class="donate-button"
-        target="_blank"
-        >Learn more about Lifeline</a
-      >
-    </section>
-    <section class="gallery">
-      <h2>Our Cookies</h2>
-      <div class="cookie-gallery">
-        <div class="cookie">
-          <a href="cookie_form.html?type=chocolate_chip">
-            <img src="cookie1.jpg.jpg" alt="Chocolate Chip Cookie" />
-          </a>
-          <p>Chocolate Chip Cookie</p>
-        </div>
-        <div class="cookie">
-          <a href="cookie_form.html?type=oatmeal_raisin">
-            <img src="cookie2.jpg.jpg" alt="Oatmeal Raisin Cookie" />
-          </a>
-          <p>Peanut Butter Cookie</p>
-        </div>
-        <div class="cookie">
-          <a href="cookie_form.html?type=peanut_butter">
-            <img src="cookie3.jpg.jpg" alt="Peanut Butter Cookie" />
-          </a>
-          <p>Jam Drop Cookie</p>
-        </div>
-      </div>
-    </section>
+
+    <main>
+        <section class="introduction">
+            <h2>Delicious Cookies, Delivered Fresh!</h2>
+            <p>We bake cookies fresh daily. Choose from a variety of flavors and have them delivered to your door.</p>
+            <a href="order.html" class="lifeline-button">Order Now</a>
+        </section>
+
+        <section class="cookie-images">
+            <h2>Our Popular Cookies</h2>
+            <img src="cookie-image1.jpg" alt="Chocolate Chip Cookies" class="cookie-image">
+            <img src="cookie-image2.jpg" alt="Oatmeal Cookies" class="cookie-image">
+            <img src="cookie-image3.jpg" alt="Peanut Butter Cookies" class="cookie-image">
+            <img src="cookie-image4.jpg" alt="Sugar Cookies" class="cookie-image">
+        </section>
+    </main>
+
     <footer>
-      <p>
-        &copy; 2024 Cookies for Kicks. All rights reserved (for legal purposes
-        this is a joke).
-      </p>
+        <p>&copy; 2024 Cookies for Kicks. All rights reserved.</p>
     </footer>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const cookies = document.querySelectorAll(".cookie a");
-
-        cookies.forEach(cookie => {
-          cookie.addEventListener("click", function(event) {
-            event.preventDefault();
-            const type = new URL(this.href).searchParams.get("type");
-            const formHTML = `
-              <div class="form-container">
-                <h2>Order Your Cookie</h2>
-                <form id="orderForm">
-                  <input type="hidden" name="cookie" value="${type}">
-                  <input type="text" name="name" placeholder="Your Name" required>
-                  <input type="email" name="email" placeholder="Your Email" required>
-                  <button type="submit">Order Cookie</button>
-                </form>
-              </div>
-            `;
-            document.body.innerHTML = formHTML;
-            document.getElementById("orderForm").addEventListener("submit", submitForm);
-          });
-        });
-
-        function submitForm(event) {
-          event.preventDefault();
-          const formData = new FormData(this);
-          fetch('https://<your-heroku-app-name>.herokuapp.com/send-email', {
-            method: 'POST',
-            body: JSON.stringify(Object.fromEntries(formData)),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          .then(response => response.json())
-          .then(data => alert(data.message))
-          .catch(error => console.error('Error:', error));
-        }
-      });
-    </script>
-  </body>
+</body>
 </html>
