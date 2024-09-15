@@ -17,6 +17,7 @@
       <h1>Order Your Cookie</h1>
       <p>Please fill in your details and we will get back to you soon!</p>
     </header>
+
     <section class="form-section">
       <form id="orderForm" class="order-form">
         <label for="name">Name:</label>
@@ -35,9 +36,13 @@
           <option value="jam_drop">Jam Drop Cookie</option>
         </select>
 
+        <label for="quantity">How many cookies do you want?</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1" required />
+
         <button type="submit">Submit Order</button>
       </form>
     </section>
+
     <footer>
       <p>
         &copy; 2024 Cookies for Kicks. All rights reserved (for legal purposes
