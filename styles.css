@@ -24,18 +24,6 @@ header {
     position: relative;
 }
 
-.logo-container img {
-    width: 300px; /* Increased size */
-    height: auto;
-    margin-bottom: 1rem;
-    animation: rotate 10s infinite linear;
-}
-
-@keyframes rotate {
-    0% { transform: rotate(360deg); }
-    100% { transform: rotate(0deg); }
-}
-
 header h1 {
     font-family: 'Pacifico', cursive;
     font-size: 3rem;
@@ -46,85 +34,6 @@ header p {
     font-size: 1.25rem;
     margin: 0;
     font-weight: 300;
-}
-
-.hero {
-    text-align: center;
-    padding: 4rem 2rem;
-}
-
-.hero h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.hero p {
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto 2rem;
-}
-
-.donate-button {
-    background-color: #ff6f61;
-    color: white;
-    padding: 0.75rem 2rem;
-    text-decoration: none;
-    font-size: 1.25rem;
-    border-radius: 25px;
-    transition: background-color 0.3s ease;
-}
-
-.donate-button:hover {
-    background-color: #e45a4f;
-}
-
-.gallery {
-    text-align: center;
-    padding: 4rem 2rem;
-}
-
-.gallery h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-}
-
-.cookie-gallery {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.cookie {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    max-width: 200px;
-    transition: transform 0.3s ease;
-}
-
-.cookie img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.cookie p {
-    margin: 0;
-    padding: 1rem;
-    font-size: 1rem;
-}
-
-.cookie:hover {
-    transform: scale(1.05);
-}
-
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 1rem 0;
 }
 
 .form-section {
@@ -159,6 +68,14 @@ footer {
     font-size: 1rem;
 }
 
+.order-form input[type="number"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
 .order-form button {
     width: 100%;
     padding: 0.75rem;
@@ -173,4 +90,11 @@ footer {
 
 .order-form button:hover {
     background-color: #e45a4f;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
 }
