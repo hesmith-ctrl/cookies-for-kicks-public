@@ -1,113 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cookies for Kicks</title>
+    <title>Order Your Cookie</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap"
-      rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap"
+        rel="stylesheet"
     />
-  </head>
-  <body>
+    <!-- Include EmailJS Library -->
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("5yJynLEvx8xStr2il"); // Your Public API Key
+        })();
+    </script>
+</head>
+<body>
     <header>
-      <div class="logo-container">
-        <img src="logo.PNG.png" alt="Cookies for Kicks Logo" />
-      </div>
-      <img src="logo.PNG2.png" alt="Cookies for Kicks Logo" />
-      <h1>Sweetening Lives, One Cookie at a Time</h1>
-      <p>Delicious cookies for a great cause!</p>
+        <div class="logo-container">
+            <img src="logo.PNG.png" alt="Cookies for Kicks Logo" class="rotating-logo" />
+        </div>
+        <h1>Order Your Cookie</h1>
+        <p>Please fill in your details, and we'll get back to you soon!</p>
     </header>
-    <section class="hero">
-      <h2>Welcome to Cookies for Kicks</h2>
-      <p>
-        My name is Henry Smith, and my mission for this project is to provide
-        you with the most delicious homemade cookies while also helping the
-        lives of everyone with "non-cookie" needs in the process. All profits
-        are donated to the chairty Lifeline. A noble cause dedicated to helping
-        are donated to the charity Lifeline. A noble cause dedicated to helping
-        all Australians facing a crisis with constant 24 hour support. Buy a
-        cookie today and you'll be smiling for two. Order now!
-      </p>
-      <a
-        href="https://www.lifeline.org.au"
-        class="donate-button"
-        target="_blank"
-        >Learn more about Lifeline</a
-      >
+    <section class="form-section">
+        <form id="orderForm" class="order-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required />
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" required />
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" placeholder="Your Address" required />
+
+            <label for="cookie-type">Cookie Type:</label>
+            <select id="cookie-type" name="cookie_type" required>
+                <option value="chocolate_chip">Chocolate Chip Cookie</option>
+                <option value="peanut_butter">Peanut Butter Cookie</option>
+                <option value="jam_drop">Jam Drop Cookie</option>
+            </select>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" placeholder="Number of Cookies" min="1" required />
+
+            <button type="submit">Submit Order</button>
+        </form>
     </section>
-    <section class="gallery">
-      <h2>Our Cookies</h2>
-      <div class="cookie-gallery">
-        <div class="cookie">
-          <a href="cookie_form.html?type=chocolate_chip">
-            <img src="cookie1.jpg.jpg" alt="Chocolate Chip Cookie" />
-          </a>
-          <p>Chocolate Chip Cookie</p>
-        </div>
-        <div class="cookie">
-          <a href="cookie_form.html?type=oatmeal_raisin">
-            <img src="cookie2.jpg.jpg" alt="Oatmeal Raisin Cookie" />
-          </a>
-          <p>Peanut Butter Cookie</p>
-        </div>
-        <div class="cookie">
-          <a href="cookie_form.html?type=peanut_butter">
-            <img src="cookie3.jpg.jpg" alt="Peanut Butter Cookie" />
-          </a>
-          <p>Jam Drop Cookie</p>
-        </div>
-      </div>
+
+    <!-- New Audio Section -->
+    <section class="audio-section">
+        <h2>Listen To This!</h2>
+        <audio controls>
+            <source src="Untitled notebook (3).wav" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
     </section>
+
     <footer>
-      <p>
-        &copy; 2024 Cookies for Kicks. All rights reserved (for legal purposes
-        this is a joke).
-      </p>
+        <p>
+            &copy; 2024 Cookies for Kicks. All rights reserved (for legal purposes this is a joke).
+        </p>
     </footer>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const cookies = document.querySelectorAll(".cookie a");
-
-        cookies.forEach(cookie => {
-          cookie.addEventListener("click", function(event) {
+        document.getElementById("orderForm").addEventListener("submit", function (event) {
             event.preventDefault();
-            const type = new URL(this.href).searchParams.get("type");
-            const formHTML = `
-              <div class="form-container">
-                <h2>Order Your Cookie</h2>
-                <form id="orderForm">
-                  <input type="hidden" name="cookie" value="${type}">
-                  <input type="text" name="name" placeholder="Your Name" required>
-                  <input type="email" name="email" placeholder="Your Email" required>
-                  <button type="submit">Order Cookie</button>
-                </form>
-              </div>
-            `;
-            document.body.innerHTML = formHTML;
-            document.getElementById("orderForm").addEventListener("submit", submitForm);
-          });
-        });
 
-        function submitForm(event) {
-          event.preventDefault();
-          const formData = new FormData(this);
-          fetch('https://<your-heroku-app-name>.herokuapp.com/send-email', {
-            method: 'POST',
-            body: JSON.stringify(Object.fromEntries(formData)),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          .then(response => response.json())
-          .then(data => alert(data.message))
-          .catch(error => console.error('Error:', error));
-        }
-      });
+            // Collect form data
+            const formData = new FormData(this);
+
+            // Prepare EmailJS parameters
+            const emailParams = {
+                name: formData.get("name"),
+                email: formData.get("email"),
+                address: formData.get("address"),
+                cookie_type: formData.get("cookie_type"),
+                quantity: formData.get("quantity"),
+            };
+
+            // Send email using EmailJS
+            emailjs.send("service_hjj5aob", "template_n8d9env", emailParams)
+                .then((response) => {
+                    alert("Your order has been placed successfully!");
+                    console.log("SUCCESS!", response.status, response.text);
+                })
+                .catch((error) => {
+                    alert("Failed to send order. Please try again.");
+                    console.error("FAILED...", error);
+                });
+        });
     </script>
-  </body>
+</body>
 </html>
