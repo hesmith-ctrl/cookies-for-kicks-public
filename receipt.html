@@ -64,9 +64,11 @@
             // Calculate total price based on the special deal
             let totalPrice;
             if (order.quantity >= 5) {
-                totalPrice = 8 * Math.floor(order.quantity / 5) + 2 * (order.quantity % 5);
+                const numberOfDeals = Math.floor(order.quantity / 5); // Calculate how many complete sets of 5 are in the order
+                const remainingCookies = order.quantity % 5; // Calculate the remainder
+                totalPrice = (numberOfDeals * 8) + (remainingCookies * 2); // Each set of 5 is $8, and each remaining cookie is $2
             } else {
-                totalPrice = 2 * order.quantity;
+                totalPrice = 2 * order.quantity; // If fewer than 5 cookies, charge $2 each
             }
 
             // Display the total price
