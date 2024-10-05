@@ -10,13 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap" rel="stylesheet"/>
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico.png" type="image/png"/>
-    <!-- Include EmailJS Library -->
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script type="text/javascript">
-      (function() {
-        emailjs.init("5yJynLEvx8xStr2il"); // Your EmailJS Public API Key
-      })();
-    </script>
 </head>
 <body>
     <header>
@@ -25,7 +18,7 @@
       </div>
       <img src="logo.PNG2.png" alt="Cookies for Kicks Logo" />
       <h1>Sweetening Lives, One Cookie at a Time</h1>
-      <p>Delicious cookies for a great cause!</p>
+      <p>Delicious cookies for a great cause</p>
     </header>
 
     <!-- Audio Section -->
@@ -50,8 +43,10 @@
       <a href="https://www.lifeline.org.au" class="donate-button" target="_blank">Learn more about Lifeline</a>
     </section>
 
+    <!-- Updated Cookie Section with Pricing Information -->
     <section class="gallery">
       <h2>Our Cookies</h2>
+      <p class="pricing-info">All cookies are just <strong>$2 each</strong>, but you can get the special deal of <strong>$8 for 5 cookies</strong>! Grab yours today and enjoy deliciousness for a cause.</p>
       <div class="cookie-gallery">
         <div class="cookie">
           <a href="cookie_form.html?type=chocolate_chip">
@@ -77,21 +72,5 @@
     <footer>
       <p>&copy; 2024 Cookies for Kicks. All rights reserved (for legal purposes this is a joke).</p>
     </footer>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const cookies = document.querySelectorAll(".cookie a");
-
-        cookies.forEach(cookie => {
-          cookie.addEventListener("click", function(event) {
-            event.preventDefault();
-
-            // Redirect to the appropriate order page with the selected cookie type
-            const type = new URL(this.href).searchParams.get("type");
-            window.location.href = `cookie_form.html?type=${type}`;
-          });
-        });
-      });
-    </script>
 </body>
 </html>
