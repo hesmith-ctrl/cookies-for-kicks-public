@@ -144,3 +144,58 @@ footer {
     text-align: center;
     padding: 1rem 0;
 }
+
+/* Styles for the Order Form Page */
+.form-section {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.order-form {
+    display: inline-block;
+    text-align: left;
+    max-width: 400px;
+    width: 100%;
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+.order-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.order-form input,
+.order-form select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.order-form button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.order-form button:hover {
+    background-color: #e45a4f;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
