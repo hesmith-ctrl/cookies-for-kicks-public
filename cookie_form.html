@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Order Your Cookie Please!</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            emailjs.init("5yJynLEvx8xStr2il"); // EmailJS Public API Key
-        })();
-    </script>
+    <!-- Link to Google Fonts for styling -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
+        <div class="logo-container">
+            <img src="logo.PNG.png" alt="Cookies for Kicks Logo" class="rotating-logo" />
+        </div>
         <h1>Order Your Cookie</h1>
-        <p>Please fill in your details, and we'll get back to you soon!</p>
+        <p>Place your order and we will get back to you soon!</p>
     </header>
+
+    <!-- Order Form Section -->
     <section class="form-section">
         <form id="orderForm" class="order-form">
             <label for="name">Name:</label>
@@ -42,32 +45,33 @@
         </form>
     </section>
 
+    <!-- JavaScript to handle form submission and redirection -->
     <script>
         document.getElementById("orderForm").addEventListener("submit", function (event) {
             event.preventDefault();
-
+            
             // Collect form data
             const formData = new FormData(this);
 
-            // Prepare EmailJS parameters
-            const emailParams = {
-                name: formData.get("name"),
-                email: formData.get("email"),
-                address: formData.get("address"),
-                cookie_type: formData.get("cookie_type"),
-                quantity: formData.get("quantity"),
-            };
+            // Construct the order details for display
+            const orderDetails = `
+                Name: ${formData.get("name")}\n
+                Email: ${formData.get("email")}\n
+                Address: ${formData.get("address")}\n
+                Cookie Type: ${formData.get("cookie_type")}\n
+                Quantity: ${formData.get("quantity")}
+            `;
 
-            // Send email using EmailJS
-            emailjs.send("service_hjj5aob", "template_n8d9env", emailParams)
-                .then((response) => {
-                    alert("Your order has been placed successfully!");
-                })
-                .catch((error) => {
-                    alert("Failed to send order. Please try again.");
-                    console.error("FAILED...", error);
-                });
+            // Display order confirmation
+            alert("Thank you for your order! Here are the details:\n" + orderDetails);
+
+            // Optionally, redirect back to the main page or a thank you page
+            window.location.href = "index.html";
         });
     </script>
+
+    <footer>
+        <p>&copy; 2024 Cookies for Kicks. All rights reserved.</p>
+    </footer>
 </body>
 </html>
