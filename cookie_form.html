@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Order Your Cookie Please!</title>
     <link rel="stylesheet" href="styles.css" />
-    <!-- Link to Google Fonts for styling -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
@@ -19,7 +18,6 @@
         <p>Place your order and we will get back to you soon!</p>
     </header>
 
-    <!-- Order Form Section -->
     <section class="form-section">
         <form id="orderForm" class="order-form">
             <label for="name">Name:</label>
@@ -45,33 +43,24 @@
         </form>
     </section>
 
-    <!-- JavaScript to handle form submission and redirection -->
-    <script>
-        document.getElementById("orderForm").addEventListener("submit", function (event) {
-            event.preventDefault();
-            
-            // Collect form data
-            const formData = new FormData(this);
-
-            // Construct the order details for display
-            const orderDetails = `
-                Name: ${formData.get("name")}\n
-                Email: ${formData.get("email")}\n
-                Address: ${formData.get("address")}\n
-                Cookie Type: ${formData.get("cookie_type")}\n
-                Quantity: ${formData.get("quantity")}
-            `;
-
-            // Display order confirmation
-            alert("Thank you for your order! Here are the details:\n" + orderDetails);
-
-            // Optionally, redirect back to the main page or a thank you page
-            window.location.href = "index.html";
-        });
-    </script>
-
     <footer>
         <p>&copy; 2024 Cookies for Kicks. All rights reserved.</p>
     </footer>
+
+    <!-- Script to handle form submission and redirect to the receipt page -->
+    <script>
+        document.getElementById("orderForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Collect form data
+            const formData = new FormData(this);
+            
+            // Construct query string for receipt.html
+            const queryString = new URLSearchParams(formData).toString();
+
+            // Redirect to the receipt page with form data as query parameters
+            window.location.href = `receipt.html?${queryString}`;
+        });
+    </script>
 </body>
 </html>
