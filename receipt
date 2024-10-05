@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Receipt</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Order Receipt</h1>
+    </header>
+
+    <section class="form-section">
+        <div class="receipt-container">
+            <h2>Thank you for your order!</h2>
+            <p class="receipt-message">Congratulations on supporting Lifeline. Please screenshot your receipt and email it to: <strong>henry.smith@student.hutchins.tas.edu.au</strong></p>
+            
+            <!-- Receipt Details Section -->
+            <div class="order-details">
+                <h3>Order Summary</h3>
+                <p id="customerName"></p>
+                <p id="customerEmail"></p>
+                <p id="customerAddress"></p>
+                <p id="cookieType"></p>
+                <p id="cookieQuantity"></p>
+                <p class="total-price" id="totalPrice"></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Cookies for Kicks. All rights reserved.</p>
+    </footer>
+
+    <!-- Script to parse and display order details from URL parameters -->
+    <script>
+        // Function to get query parameters from URL
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                name: params.get("name"),
+                email: params.get("email"),
+                address: params.get("address"),
+                cookie_type: params.get("cookie_type"),
+                quantity: parseInt(params.get("quantity"), 10) || 0 // Ensure it's a number
+            };
+        }
+
+        // Display the order details on the receipt page
+        function displayReceipt() {
+            const order = getQueryParams();
+
+            // Populate order details on the receipt page
+            document.getElementById("customerName").innerText = `Customer Name: ${order.name}`;
+            document.getElementById("customerEmail").innerText = `Customer Email: ${order.email}`;
+            document.getElementById("customerAddress").innerText = `Customer Address: ${order.address}`;
+            document.getElementById("cookieType").innerText = `Cookie Type: ${order.cookie_type}`;
+            document.getElementById("cookieQuantity").innerText = `Quantity: ${order.quantity}`;
+
+            // Calculate total price based on the special deal
+            let totalPrice;
+            if (order.quantity >= 5) {
+                totalPrice = 8 * Math.floor(order.quantity / 5) + 2 * (order.quantity % 5);
+            } else {
+                totalPrice = 2 * order.quantity;
+            }
+
+            // Display the total price
+            document.getElementById("totalPrice").innerText = `Total Price: $${totalPrice}`;
+        }
+
+        // Call displayReceipt when the page loads
+        window.onload = displayReceipt;
+    </script>
+</body>
+</html>
