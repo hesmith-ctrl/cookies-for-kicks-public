@@ -8,9 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico.png" type="image/png"/>
 </head>
 <body>
     <header>
+        <div class="logo-container">
+            <img src="logo.PNG.png" alt="Cookies for Kicks Logo" class="rotating-logo" />
+        </div>
         <h1>Order Receipt</h1>
     </header>
 
@@ -18,13 +23,12 @@
         <div class="receipt-container">
             <h2>Thank you for your order!</h2>
             <p class="receipt-message">
-                Congratulations on supporting Lifeline! Please screenshot your receipt and email it to: 
+                Congratulations on supporting Lifeline. Please screenshot your receipt and email it to: 
                 <strong>henry.smith@student.hutchins.tas.edu.au</strong>
             </p>
 
-            <!-- New Pickup Instructions Message -->
             <p class="pickup-instructions">
-                <strong>Make sure you BRING YOUR MONEY to classroom MSG03 during Friday lunchtime to receive your order!</strong>
+                <strong>Bring your money to classroom MSG03 during Friday lunchtime to receive your order!</strong>
             </p>
             
             <!-- Receipt Details Section -->
@@ -69,7 +73,7 @@
             document.getElementById("cookieType").innerText = `Cookie Type: ${order.cookie_type}`;
             document.getElementById("cookieQuantity").innerText = `Quantity: ${order.quantity}`;
 
-            // Calculate total price based on the new pricing strategy
+            // Calculate total price based on the pricing strategy
             let totalPrice;
             if (order.quantity === 5) {
                 totalPrice = 8; // Special deal: $8 for exactly 5 cookies
