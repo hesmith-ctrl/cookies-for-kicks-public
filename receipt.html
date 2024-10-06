@@ -61,14 +61,12 @@
             document.getElementById("cookieType").innerText = `Cookie Type: ${order.cookie_type}`;
             document.getElementById("cookieQuantity").innerText = `Quantity: ${order.quantity}`;
 
-            // Calculate total price based on the special deal
+            // Calculate total price based on the new pricing strategy
             let totalPrice;
-            if (order.quantity >= 5) {
-                const numberOfDeals = Math.floor(order.quantity / 5); // Calculate how many complete sets of 5 are in the order
-                const remainingCookies = order.quantity % 5; // Calculate the remainder
-                totalPrice = (numberOfDeals * 8) + (remainingCookies * 2); // Each set of 5 is $8, and each remaining cookie is $2
+            if (order.quantity === 5) {
+                totalPrice = 8; // Special deal: $8 for exactly 5 cookies
             } else {
-                totalPrice = 2 * order.quantity; // If fewer than 5 cookies, charge $2 each
+                totalPrice = 2 * order.quantity; // $2 for each cookie if quantity is not 5
             }
 
             // Display the total price
