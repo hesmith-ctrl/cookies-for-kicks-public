@@ -75,10 +75,10 @@
 
             // Calculate total price based on the pricing strategy
             let totalPrice;
-            if (order.quantity === 5) {
-                totalPrice = 8; // Special deal: $8 for exactly 5 cookies
+            if (order.quantity === 6) {
+                totalPrice = 5; // Special deal: $5 for exactly 6 cookies
             } else {
-                totalPrice = 2 * order.quantity; // $2 for each cookie if quantity is not 5
+                totalPrice = 1 * order.quantity; // $1 for each cookie if quantity is not 5
             }
 
             // Display the total price
